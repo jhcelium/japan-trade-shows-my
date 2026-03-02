@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://export-to-japan.neoidigital.com/sitemap.xml

@@ -1,0 +1,189 @@
+# NeoiDigital Multi-site Mother Template
+
+A GitHub Template Repository for independent Japan market entry sub-sites under the NeoiDigital hub.
+
+**Hub**: [https://www.japan-market.neoidigital.com/](https://www.japan-market.neoidigital.com/)
+
+---
+
+## How to create a new sub-site
+
+1. Click **"Use this template"** on GitHub → **"Create a new repository"**
+2. Name the repo after the sub-site (e.g. `export-to-japan`)
+3. Clone the new repo locally
+4. Run `npm install`
+5. Open `src/content/site.config.ts`
+6. Change **one line**: `ACTIVE_SITE_KEY`
+
+```ts
+// Change this to the preset key for your sub-site:
+export const ACTIVE_SITE_KEY = "export-to-japan";
+```
+
+7. Run `npm run build` — sitemap.xml and robots.txt are auto-generated for the active preset's domain
+8. Deploy `dist/` to Cloudflare Pages
+
+---
+
+## Cloudflare Pages deploy settings
+
+| Setting | Value |
+|---|---|
+| Build command | `npm run build` |
+| Build output directory | `dist` |
+| Node.js version | 18 or later |
+
+SPA routing is handled by `public/_redirects`:
+```
+/* /index.html 200
+```
+
+---
+
+## Available presets (ACTIVE_SITE_KEY values)
+
+| Key | Domain | Positioning |
+|---|---|---|
+| `japan-market-entry` | japan-market-entry.neoidigital.com | Core hub entry point |
+| `malaysia-japan-bridge` | malaysia-japan-bridge.neoidigital.com | Malaysia–Japan bridge service |
+| `find-japan-distributor` | find-japan-distributor.neoidigital.com | Distributor search tool page |
+| `japan-trade-shows` | japan-trade-shows.neoidigital.com | Trade show entry channel |
+| `japan-local-presence` | japan-local-presence.neoidigital.com | Local presence / trust anchor |
+| `export-to-japan` | export-to-japan.neoidigital.com | **Default** — transactional export intent |
+| `free-japan-consultation` | free-japan-consultation.neoidigital.com | Lead magnet / strategy call |
+
+---
+
+## What to edit in `src/content/site.config.ts`
+
+### Step 1 — Set the active key
+
+```ts
+export const ACTIVE_SITE_KEY = "export-to-japan"; // ← change this line only
+```
+
+### Step 2 — (Optional) Customise the preset copy
+
+Each preset in `SITE_PRESETS` accepts the following fields:
+
+| Field | Type | Purpose |
+|---|---|---|
+| `domain` | `string` | Full domain without protocol — used for canonical, OG, sitemap |
+| `siteName` | `string` | Short display name in header and title tags |
+| `brandLine` | `string` | One-line tagline (hero and footer) |
+| `primaryIntent` | `string` | One-sentence statement of what this site does |
+| `mainKeywords` | `[string, string]` | Exactly 2 primary SEO keywords |
+| `supportingKeywords` | `string[]` | Mid-tail keyword cluster |
+| `longTailKeywords` | `string[]` | Long-tail keyword phrases for content targeting |
+| `primaryCTA` | `{ label, href }` | Main call-to-action button — usually a mailto or form link |
+| `hubLink` | `string` | Must remain `HUB_LINK` — do not hard-code |
+| `company` | `string` | Legal company name for footer |
+| `localPresence` | `boolean` | Show Kasugai, Aichi local presence block when `true` |
+| `socialProofBullets` | `string[]` | 3–5 short factual proof points shown on home |
+| `faq` | `FAQ[]` | Array of `{ question, answer }` — shown on /faq and previewed on home |
+| `noindex` | `boolean?` | Set `true` to add `Disallow: /` in robots.txt and `noindex,nofollow` meta |
+
+### Example — creating a custom preset
+
+```ts
+"my-custom-site": {
+  domain: "my-custom-site.neoidigital.com",
+  siteName: "My Custom Site",
+  brandLine: "Short tagline here.",
+  primaryIntent: "One sentence describing what this site does for Malaysian exporters.",
+  mainKeywords: ["primary keyword one", "primary keyword two"],
+  supportingKeywords: ["keyword three", "keyword four"],
+  longTailKeywords: ["long tail phrase one", "long tail phrase two"],
+  primaryCTA: {
+    label: "Contact Us",
+    href: "mailto:hello@neoidigital.com?subject=Inquiry",
+  },
+  hubLink: HUB_LINK,
+  company: "NeoiDigital",
+  localPresence: true,
+  socialProofBullets: ["Point one", "Point two", "Point three"],
+  faq: [
+    { question: "Question?", answer: "Answer." },
+  ],
+},
+```
+
+Then set:
+```ts
+export const ACTIVE_SITE_KEY = "my-custom-site";
+```
+
+---
+
+## Auto-generated files
+
+These files are **overwritten on every `npm run build`** — do not edit manually:
+
+- `public/sitemap.xml` — generated from the active preset's `domain`
+- `public/robots.txt` — generated from `domain` and `noindex` flag
+
+The generator is `scripts/generate-public.cjs` (runs as the `prebuild` step). Users never need to edit it.
+
+---
+
+## Project structure
+
+```
+src/
+  content/
+    site.config.ts      ← ONLY FILE TO EDIT PER SUB-SITE
+  lib/
+    seo.ts              ← canonical URL, JSON-LD builders
+  components/
+    SEOHead.tsx         ← Helmet-based meta/JSON-LD injection
+    Header.tsx
+    Footer.tsx
+    CTA.tsx
+    KeywordBlock.tsx
+    FAQList.tsx
+  pages/
+    Home.tsx
+    About.tsx
+    FAQ.tsx
+  App.tsx
+  main.tsx
+  index.css
+public/
+  _redirects           ← Cloudflare Pages SPA routing
+  robots.txt           ← auto-generated by prebuild
+  sitemap.xml          ← auto-generated by prebuild
+  og.png               ← placeholder (replace with real OG image)
+scripts/
+  generate-public.cjs  ← build tool — do not edit
+```
+
+---
+
+## Design principles
+
+- No rounded corners, no shadows, no animations
+- Clean editorial typography using system font stack
+- Whitespace-driven hierarchy
+- No stock photos — content-first layout
+
+---
+
+## SEO behaviour
+
+- Canonical URL: `https://{config.domain}{path}`
+- OG image: `https://{config.domain}/og.png`
+- JSON-LD: Organization + WebSite + WebPage on all pages
+- JSON-LD: FAQPage schema injected on `/faq`
+- If `noindex: true`: robots.txt blocks crawlers + `noindex,nofollow` meta tag
+
+---
+
+## Routes
+
+| Path | Page |
+|---|---|
+| `/` | Home |
+| `/about` | About |
+| `/faq` | FAQ |
+
+Direct URL access works on Cloudflare Pages via `public/_redirects`.
