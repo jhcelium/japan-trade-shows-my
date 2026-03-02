@@ -42,6 +42,8 @@ export type SiteConfig = {
   faq: FAQ[];
   /** Set true to add Disallow: / in robots.txt and noindex,nofollow meta */
   noindex?: boolean;
+  /** Single anchor keyword this sub-site narrative is built around */
+  primaryAnchorKeyword?: string;
 };
 
 export const HUB_LINK = "https://www.japan-market.neoidigital.com/";
@@ -262,10 +264,11 @@ export const SITE_PRESETS: Record<string, SiteConfig> = {
   // ── 4 ──────────────────────────────────────────────────────
   "japan-trade-shows": {
     domain: "japan-trade-shows.neoidigital.com",
-    siteName: "Japan Trade Shows",
-    brandLine: "Use Japan's trade shows as a structured market entry channel.",
+    siteName: "NeoiDigital",
+    brandLine: "Japan Trade Shows",
     primaryIntent:
-      "We help Malaysian exporters select, prepare for, and follow up on Japan B2B trade shows as part of a broader market entry plan.",
+      "A structured guide to using Japan trade shows as a market entry channel for Malaysian exporters.",
+    primaryAnchorKeyword: "japan trade shows",
     mainKeywords: [
       "japan trade shows",
       "japan b2b exhibitions",
@@ -286,46 +289,62 @@ export const SITE_PRESETS: Record<string, SiteConfig> = {
       "japan b2b exhibitions for malaysian companies",
     ],
     primaryCTA: {
-      label: "Get Trade Show Guidance",
-      href: "mailto:hello@neoidigital.com?subject=Japan Trade Show Support",
+      label: "Plan your Japan trade show strategy",
+      href: "https://www.japan-market.neoidigital.com/",
     },
     hubLink: HUB_LINK,
     company: "NeoiDigital",
     localPresence: true,
     socialProofBullets: [
-      "Experience with FOODEX Japan and major B2B category shows",
-      "Pre-show briefing on buyer and distributor profiles",
-      "On-the-ground support during show days",
-      "Post-show follow-up coordination with qualified contacts",
-      "Japan-based coordinator in Osaka, Japan",
+      "Exhibition-first entry model for category validation.",
+      "Booth messaging structured around distributor screening.",
+      "Pre-booked meetings reduce random foot traffic dependency.",
+      "Follow-up discipline prevents lead loss after the event.",
+      "Osaka-based coordination for local logistics and meetings.",
     ],
     faq: [
       {
-        question: "Which Japan trade shows are most relevant for Malaysian exporters?",
+        question: "When do Japan trade shows make sense as a market entry channel?",
         answer:
-          "FOODEX Japan (food and beverage), Japan Pack, Medtec Japan, and Cosme Tokyo are category-specific starting points. Selection depends on your product type and target channel.",
+          "Trade shows are appropriate when your product already has regional traction, you have clear category positioning, and you are prepared to follow up systematically after the event. They are not effective without pre-show meeting preparation.",
       },
       {
-        question: "Do I need to exhibit, or can I attend as a visitor?",
+        question: "Which Japan trade fair is right for my product?",
         answer:
-          "Visiting first as a buyer-oriented observer is often more efficient for initial market research. Exhibiting is appropriate once you have a confirmed distributor or buyer interest.",
+          "Food and beverage exporters typically consider FOODEX Japan. Industrial and manufacturing categories have dedicated sector shows. Lifestyle and consumer goods have separate exhibition tracks. The right show depends on your target channel — distributor-heavy or retail-heavy.",
       },
       {
-        question: "What happens after the trade show?",
+        question: "What does Japan trade show preparation involve?",
         answer:
-          "Follow-up is where most SMEs lose momentum. We coordinate post-show outreach, translate materials if needed, and maintain contact with qualified leads on your behalf.",
+          "Japan trade show preparation includes pre-booking distributor meetings, localising booth messaging, preparing screening questions for visitors, and coordinating logistics. Preparation should begin 4–6 months before the exhibition.",
       },
       {
-        question: "How far in advance should we plan for a Japan trade show?",
+        question: "What is the typical cost structure for exhibiting at a Japan trade show?",
         answer:
-          "Exhibiting requires 4–6 months of preparation. For attending as a visitor, 6–8 weeks is usually sufficient if your product samples and materials are ready.",
+          "Costs include booth rental, build-out, shipping of samples and materials, travel, accommodation, translation, and post-show follow-up coordination. Total investment varies by show scale and booth size, typically ranging from ¥500,000 to ¥2,000,000+ for a standard participation.",
       },
       {
-        question: "Can you translate our materials into Japanese for the show?",
+        question: "What is the realistic follow-up process after a Japan trade show?",
         answer:
-          "We handle core product summary and presentation translation as part of trade show preparation support.",
+          "Effective follow-up involves classifying leads within 48 hours, sending bilingual summary emails, scheduling next meetings, and preparing a decision memo for each serious prospect. Most SMEs lose momentum at this stage by not having a structured follow-up protocol.",
+      },
+      {
+        question: "How do you screen distributors at your booth?",
+        answer:
+          "Screen by asking about regional coverage, current portfolio overlap, cold-chain or logistics capability, typical MOQ requirements, after-sales structure, decision cycle, and exclusivity expectations. These seven questions eliminate misfit prospects quickly.",
+      },
+      {
+        question: "How long does it take from exhibition participation to a first deal in Japan?",
+        answer:
+          "Realistically, 6–12 months from first exhibition contact to a signed commercial agreement. Japanese distributors operate on careful evaluation cycles. Rushing the process typically causes rejection. First deal timelines improve significantly with pre-booked meetings.",
+      },
+      {
+        question: "What are the most common failure patterns after Japan exhibitions?",
+        answer:
+          "The most common failures are: no pre-booked meetings, unclear distributor type targeting, over-reliance on walk-in booth traffic, no structured follow-up after the event, and unrealistic expectations about deal timelines.",
       },
     ],
+    noindex: false,
   },
 
   // ── 5 ──────────────────────────────────────────────────────
@@ -537,5 +556,5 @@ export const SITE_PRESETS: Record<string, SiteConfig> = {
 // ============================================================
 // ACTIVE SITE — change only this line per sub-site repo
 // ============================================================
-export const ACTIVE_SITE_KEY = "export-to-japan";
+export const ACTIVE_SITE_KEY = "japan-trade-shows";
 export const siteConfig: SiteConfig = SITE_PRESETS[ACTIVE_SITE_KEY];
