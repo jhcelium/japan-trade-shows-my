@@ -9,7 +9,11 @@ export function canonicalUrl(path: string): string {
 
 /** Build full page title */
 export function pageTitle(subtitle?: string): string {
-  if (!subtitle) return siteConfig.siteName;
+  if (!subtitle) {
+    return siteConfig.brandLine
+      ? `${siteConfig.brandLine} | ${siteConfig.siteName}`
+      : siteConfig.siteName;
+  }
   return `${subtitle} | ${siteConfig.siteName}`;
 }
 

@@ -343,6 +343,11 @@ export const SITE_PRESETS: Record<string, SiteConfig> = {
         answer:
           "The most common failures are: no pre-booked meetings, unclear distributor type targeting, over-reliance on walk-in booth traffic, no structured follow-up after the event, and unrealistic expectations about deal timelines.",
       },
+      {
+        question: "Is Foodex Japan suitable for Malaysian food and beverage exporters?",
+        answer:
+          "Foodex Japan is the largest food and beverage trade show in Asia and attracts category-specific importers, distributors, and retail buyers. It is suitable for Malaysian exporters with a retail-ready or food-service product, Japanese-compliant labelling, and a preparation plan that includes pre-booked meetings. Attending without preparation or follow-up protocol produces minimal return. We support Foodex participation from pre-show meeting booking through post-show follow-up coordination.",
+      },
     ],
     noindex: false,
   },

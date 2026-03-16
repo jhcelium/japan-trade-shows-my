@@ -2,7 +2,6 @@ import { Helmet } from "react-helmet-async";
 import SEOHead from "../components/SEOHead";
 import CTA from "../components/CTA";
 import { siteConfig } from "../content/site.config";
-import { pageTitle } from "../lib/seo";
 
 // FAQPage JSON-LD — homepage-specific, conversion-relevant subset
 const HOME_FAQ_JSONLD = {
@@ -154,8 +153,9 @@ const FAQ_PREVIEW = [
 ];
 
 export default function Home() {
-  const title = pageTitle();
-  const description = `${siteConfig.brandLine} — ${siteConfig.primaryIntent}`;
+  const title = `Japan Trade Shows — Exhibition Market Entry for Malaysian Exporters | ${siteConfig.siteName}`;
+  const description =
+    "A structured guide to using Japan trade shows as a market entry channel. Fair selection, pre-show preparation, distributor screening, and follow-up discipline for Malaysian exporters.";
 
   return (
     <>
