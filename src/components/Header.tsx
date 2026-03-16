@@ -11,6 +11,8 @@ export default function Header() {
             src="/logo.png"
             alt="ネオインスパイア株式会社"
             className="h-16 w-auto object-contain"
+            fetchPriority="high"
+            loading="eager"
           />
         </Link>
       </div>

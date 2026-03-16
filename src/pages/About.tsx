@@ -70,7 +70,10 @@ export default function About() {
           <h1 className="text-3xl font-semibold text-neutral-900 leading-tight mb-4">
             Japan Trade Show Execution
           </h1>
-          <p className="text-base text-neutral-600 leading-relaxed">
+          <p
+            className="text-base text-neutral-600 leading-relaxed"
+            data-speakable-intro=""
+          >
             NeoiDigital supports Malaysian exporters through the full exhibition
             cycle — from fair selection and preparation to on-site distributor
             screening and post-show follow-up coordination.

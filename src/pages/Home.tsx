@@ -1,9 +1,10 @@
 import { Helmet } from "react-helmet-async";
+import { Link } from "react-router-dom";
 import SEOHead from "../components/SEOHead";
 import CTA from "../components/CTA";
 import { siteConfig } from "../content/site.config";
+import { howToJsonLd, definedTermSetJsonLd } from "../lib/seo";
 
-// FAQPage JSON-LD — homepage-specific, conversion-relevant subset
 const HOME_FAQ_JSONLD = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -33,6 +34,10 @@ const HOME_FAQ_JSONLD = {
       },
     },
   ],
+  speakable: {
+    "@type": "SpeakableSpecification",
+    cssSelector: ["h1", "[data-speakable-intro]", "dt"],
+  },
 };
 
 const WHAT_SHOWS_DO = [
@@ -152,6 +157,43 @@ const FAQ_PREVIEW = [
   },
 ];
 
+const HOWTO_SCHEMA = howToJsonLd(
+  "Japan Trade Show Preparation Framework",
+  "A 4-step preparation framework for Malaysian exporters exhibiting at Japan B2B trade shows. Preparation should begin 4–6 months before the exhibition.",
+  PREPARATION_STEPS.map((s) => ({ name: s.title, text: s.body })),
+);
+
+const DEFINED_TERMS_SCHEMA = definedTermSetJsonLd(
+  "Japan Trade Show Key Concepts",
+  [
+    {
+      name: "Category Validation",
+      description:
+        "The process of confirming genuine distributor or buyer interest in your product category through live exhibition interaction.",
+    },
+    {
+      name: "Distributor Screening",
+      description:
+        "A structured qualification process at the booth using predefined questions to separate serious distribution candidates from general traffic.",
+    },
+    {
+      name: "Lead Classification",
+      description:
+        "Post-show categorisation of contacts into A (purchase intent), B (evaluation), and C (general enquiry) tiers for prioritised follow-up.",
+    },
+    {
+      name: "Decision Memo",
+      description:
+        "A one-page Japanese-language product summary with pricing, MOQ, and certifications designed to move an opportunity through a distributor's internal evaluation cycle.",
+    },
+    {
+      name: "48-Hour Follow-up Window",
+      description:
+        "The critical response period after an exhibition day during which A-tier leads must receive a personalised bilingual summary email to maintain engagement.",
+    },
+  ],
+);
+
 export default function Home() {
   const title = `Japan Trade Shows — Exhibition Market Entry for Malaysian Exporters | ${siteConfig.siteName}`;
   const description =
@@ -159,7 +201,12 @@ export default function Home() {
 
   return (
     <>
-      <SEOHead path="/" title={title} description={description} />
+      <SEOHead
+        path="/"
+        title={title}
+        description={description}
+        extraJsonLd={[HOWTO_SCHEMA, DEFINED_TERMS_SCHEMA]}
+      />
 
       <Helmet>
         <script type="application/ld+json">
@@ -177,7 +224,10 @@ export default function Home() {
           <h1 className="text-3xl font-semibold text-neutral-900 leading-tight mb-4">
             Japan Trade Shows
           </h1>
-          <p className="text-sm text-neutral-600 leading-relaxed mb-8">
+          <p
+            className="text-sm text-neutral-600 leading-relaxed mb-8"
+            data-speakable-intro=""
+          >
             NeoiDigital helps Malaysian exporters use japan trade shows as a
             structured market entry channel — from fair selection to distributor
             follow-up.
@@ -453,6 +503,34 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Regulatory Authority Context */}
+        <section className="border-t border-neutral-200 pt-10">
+          <h2 className="text-xs font-semibold tracking-widest text-neutral-400 uppercase mb-4">
+            Regulatory Context
+          </h2>
+          <div className="max-w-2xl space-y-4 text-sm text-neutral-600 leading-relaxed">
+            <p>
+              Trade shows in Japan involving food, health, and consumer products
+              fall under the oversight framework of several national authorities.
+              The <strong className="text-neutral-900">Japan External Trade
+              Organization (JETRO)</strong> facilitates international trade
+              participation and publishes exhibitor guidelines. Product
+              compliance at point of sale is governed by the{" "}
+              <strong className="text-neutral-900">Consumer Affairs Agency
+              (CAA)</strong> through the Food Labelling Standards Act, while
+              import procedures and tariff classification are administered by{" "}
+              <strong className="text-neutral-900">Japan Customs</strong> under
+              the Ministry of Finance.
+            </p>
+            <p>
+              Malaysian exporters exhibiting at Japan trade shows should confirm
+              that product labelling, certification documentation, and import
+              classification meet the requirements of these agencies before
+              committing to booth space.
+            </p>
+          </div>
+        </section>
+
         {/* J — FAQ Preview (3 conversion-relevant items) */}
         <section className="border-t border-neutral-200 pt-10">
           <h2 className="text-xs font-semibold tracking-widest text-neutral-400 uppercase mb-6">
@@ -470,12 +548,12 @@ export default function Home() {
               </div>
             ))}
           </dl>
-          <a
-            href="/faq"
+          <Link
+            to="/faq"
             className="inline-block mt-4 text-sm text-neutral-500 hover:text-neutral-900 underline underline-offset-2"
           >
             View all FAQs →
-          </a>
+          </Link>
         </section>
 
         {/* K — Final CTA */}
