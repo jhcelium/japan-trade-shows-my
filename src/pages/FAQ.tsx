@@ -24,7 +24,10 @@ export default function FAQ() {
           <h1 className="text-3xl font-semibold text-neutral-900 leading-tight mb-4">
             Japan Trade Shows — Common Questions
           </h1>
-          <p className="text-base text-neutral-600 leading-relaxed">
+          <p
+            className="text-base text-neutral-600 leading-relaxed"
+            data-speakable-intro=""
+          >
             Direct answers to questions about using Japan trade shows as a
             market entry channel — covering how to use Japan trade shows to
             enter the market, which trade fair is right for your product
