@@ -3,12 +3,16 @@ import SEOHead from "../components/SEOHead";
 import FAQList from "../components/FAQList";
 import CTA from "../components/CTA";
 import { siteConfig } from "../content/site.config";
+import { faqEntriesWithSlug, previewText } from "../lib/faq";
 import { pageTitle } from "../lib/seo";
 
 export default function FAQ() {
-  const title = pageTitle("Japan Trade Shows FAQ — Fair Selection, Preparation & Follow-up");
+  const withSlug = faqEntriesWithSlug(siteConfig.faq);
+  const title = pageTitle(
+    "Japan Trade Shows FAQ — Exhibition Entry & Follow-up",
+  );
   const description =
-    "Common questions about Japan trade shows: which trade fair to choose, Foodex Japan suitability for Malaysian exporters, preparation framework, and post-show follow-up discipline.";
+    "Practical answers on using Japan trade shows and B2B exhibitions for market entry: fair choice, preparation, booth screening, costs, follow-up, Foodex, and timelines. Linked answer pages for each topic.";
 
   return (
     <>
@@ -16,36 +20,70 @@ export default function FAQ() {
 
       <main className="max-w-5xl mx-auto px-6 py-16 space-y-12">
 
-        {/* Page header */}
         <section className="max-w-2xl">
           <p className="text-xs font-semibold tracking-widest text-neutral-400 uppercase mb-4">
             FAQ
           </p>
           <h1 className="text-3xl font-semibold text-neutral-900 leading-tight mb-4">
-            Japan Trade Shows — Common Questions
+            Japan trade shows — question hub
           </h1>
           <p
-            className="text-base text-neutral-600 leading-relaxed"
+            className="text-base text-neutral-600 leading-relaxed mb-4"
             data-speakable-intro=""
           >
-            Direct answers to questions about using Japan trade shows as a
-            market entry channel — covering how to use Japan trade shows to
-            enter the market, which trade fair is right for your product
-            category, Foodex Japan suitability for Malaysian exporters, and
-            what structured follow-up looks like after an exhibition.
+            This section answers practical questions about using Japan trade
+            shows as a market entry channel — not event calendars. Topics cover
+            when exhibitions make sense, how to choose a fair by product
+            category, preparation before the show, distributor conversations at
+            the booth, realistic follow-up, and timelines to a first deal.
+          </p>
+          <p className="text-sm text-neutral-500 leading-relaxed">
+            Each linked page below gives a single full answer you can share or
+            revisit. For the broader resource (frameworks and checklists), start
+            from home.
           </p>
         </section>
 
-        {/* All FAQs from config */}
-        <section className="border-t border-neutral-200 pt-2">
-          <FAQList items={siteConfig.faq} />
-        </section>
+        {withSlug.length > 0 ? (
+          <section className="border-t border-neutral-200 pt-10" aria-labelledby="faq-topics-heading">
+            <h2
+              id="faq-topics-heading"
+              className="text-xs font-semibold tracking-widest text-neutral-400 uppercase mb-8"
+            >
+              Topics
+            </h2>
+            <ul className="space-y-0 divide-y divide-neutral-200 border-t border-neutral-200">
+              {withSlug.map((item) => (
+                <li key={item.slug} className="py-8">
+                  <h3 className="text-lg font-semibold text-neutral-900 mb-2">
+                    <Link
+                      to={`/faq/${item.slug}`}
+                      className="hover:text-neutral-600 underline-offset-4 hover:underline"
+                    >
+                      {item.question}
+                    </Link>
+                  </h3>
+                  <p className="text-sm text-neutral-600 leading-relaxed mb-3">
+                    {previewText(item.answer, 200)}
+                  </p>
+                  <Link
+                    to={`/faq/${item.slug}`}
+                    className="text-xs font-medium text-neutral-500 uppercase tracking-wide hover:text-neutral-900"
+                  >
+                    Read answer →
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ) : (
+          <section className="border-t border-neutral-200 pt-2">
+            <FAQList items={siteConfig.faq} />
+          </section>
+        )}
 
-        {/* Internal link back to Home */}
-        <section className="border-t border-neutral-200 pt-8">
-          <p className="text-sm text-neutral-500">
-            For the full resource overview including preparation framework and
-            distributor screening checklist, visit{" "}
+        <section className="border-t border-neutral-200 pt-10 flex flex-col sm:flex-row sm:flex-wrap gap-6 sm:gap-10 text-sm text-neutral-600">
+          <p>
             <Link
               to="/"
               className="text-neutral-900 font-medium underline underline-offset-2 hover:text-neutral-600"
@@ -53,17 +91,26 @@ export default function FAQ() {
               Japan Trade Shows home →
             </Link>
           </p>
+          <p>
+            <a
+              href={siteConfig.hubLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-neutral-900 font-medium underline underline-offset-2 hover:text-neutral-600"
+            >
+              NeoiDigital Japan Market Hub →
+            </a>
+          </p>
         </section>
 
-        {/* CTA */}
         <section className="border-t border-neutral-200 pt-10">
           <div className="max-w-xl">
-            <h2 className="text-xl font-semibold text-neutral-900 mb-3">
-              Have a question not answered here?
+            <h2 className="text-lg font-semibold text-neutral-900 mb-2">
+              Plan your next exhibition step
             </h2>
-            <p className="text-sm text-neutral-500 mb-6 leading-relaxed">
-              Reach out directly. We respond to all enquiries within one
-              business day.
+            <p className="text-sm text-neutral-500 mb-5 leading-relaxed">
+              Share your category and target channel via the hub intake if you
+              want execution support aligned to these answers.
             </p>
             <CTA />
           </div>

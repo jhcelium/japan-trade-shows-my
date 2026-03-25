@@ -243,6 +243,14 @@ export default function Home() {
               Japan Market Hub →
             </a>
           </div>
+          <p className="text-sm text-neutral-500 mt-5">
+            <Link
+              to="/faq"
+              className="font-medium text-neutral-800 underline underline-offset-2 hover:text-neutral-600"
+            >
+              Trade show & exhibition FAQ — practical answers →
+            </Link>
+          </p>
         </section>
 
         {/* B — What Japan Trade Shows Are For */}
