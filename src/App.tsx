@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import FAQ from "./pages/FAQ";
+import FAQDetail from "./pages/FAQDetail";
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
               <Route path="/faq" element={<FAQ />} />
+              <Route path="/faq/:slug" element={<FAQDetail />} />
             </Routes>
           </div>
           <Footer />

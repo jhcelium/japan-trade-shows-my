@@ -127,6 +127,25 @@ export function faqPageJsonLd() {
   };
 }
 
+/** Single-question FAQPage for /faq/:slug answer assets */
+export function singleFaqPageJsonLd(item: { question: string; answer: string }) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: item.answer,
+        },
+      },
+    ],
+    speakable: speakable(["h1", "[data-speakable-intro]"]),
+  };
+}
+
 // ── HowTo (AEO: step-by-step instructional content) ─────────────
 
 export type HowToStep = {

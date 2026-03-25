@@ -34,7 +34,7 @@ if (keyIndex === -1) {
 // Slice from the key to a reasonable preset block end
 const blockStart = keyIndex;
 // Find the matching closing brace for this preset (heuristic: next top-level "," + newline + 2 spaces)
-const rawBlock = src.slice(blockStart, blockStart + 4000);
+const rawBlock = src.slice(blockStart, blockStart + 12000);
 
 // ── Extract domain ────────────────────────────────────────────
 const domainMatch = rawBlock.match(/domain\s*:\s*["']([^"']+)["']/);
@@ -49,7 +49,7 @@ const noindex = noindexMatch ? noindexMatch[1] === "true" : false;
 const today = new Date().toISOString().split("T")[0];
 const baseUrl = "https://" + domain;
 
-const sitemap = [
+const lines = [
   '<?xml version="1.0" encoding="UTF-8"?>',
   '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
   "  <url>",
@@ -67,12 +67,26 @@ const sitemap = [
   "  <url>",
   "    <loc>" + baseUrl + "/faq</loc>",
   "    <lastmod>" + today + "</lastmod>",
-  "    <changefreq>monthly</changefreq>",
-  "    <priority>0.8</priority>",
+  "    <changefreq>weekly</changefreq>",
+  "    <priority>0.9</priority>",
   "  </url>",
-  "</urlset>",
-  "",
-].join("\n");
+];
+
+const slugRe = /slug:\s*"([^"]+)"/g;
+let m;
+while ((m = slugRe.exec(rawBlock)) !== null) {
+  const slug = m[1];
+  lines.push("  <url>");
+  lines.push("    <loc>" + baseUrl + "/faq/" + slug + "</loc>");
+  lines.push("    <lastmod>" + today + "</lastmod>");
+  lines.push("    <changefreq>monthly</changefreq>");
+  lines.push("    <priority>0.7</priority>");
+  lines.push("  </url>");
+}
+
+lines.push("</urlset>", "");
+
+const sitemap = lines.join("\n");
 
 // ── Build robots.txt ─────────────────────────────────────────
 const robots = noindex

@@ -6,6 +6,8 @@
 export type FAQ = {
   question: string;
   answer: string;
+  /** URL segment for /faq/:slug — set per entry when this site uses answer pages */
+  slug?: string;
 };
 
 export type CTA = {
@@ -304,46 +306,55 @@ export const SITE_PRESETS: Record<string, SiteConfig> = {
     ],
     faq: [
       {
+        slug: "when-trade-shows-make-sense",
         question: "When do Japan trade shows make sense as a market entry channel?",
         answer:
           "Trade shows are appropriate when your product already has regional traction, you have clear category positioning, and you are prepared to follow up systematically after the event. They are not effective without pre-show meeting preparation.",
       },
       {
+        slug: "which-japan-trade-fair",
         question: "Which Japan trade fair is right for my product?",
         answer:
           "Food and beverage exporters typically consider FOODEX Japan. Industrial and manufacturing categories have dedicated sector shows. Lifestyle and consumer goods have separate exhibition tracks. The right show depends on your target channel — distributor-heavy or retail-heavy.",
       },
       {
+        slug: "trade-show-preparation",
         question: "What does Japan trade show preparation involve?",
         answer:
           "Japan trade show preparation includes pre-booking distributor meetings, localising booth messaging, preparing screening questions for visitors, and coordinating logistics. Preparation should begin 4–6 months before the exhibition.",
       },
       {
+        slug: "exhibition-cost-structure",
         question: "What is the typical cost structure for exhibiting at a Japan trade show?",
         answer:
           "Costs include booth rental, build-out, shipping of samples and materials, travel, accommodation, translation, and post-show follow-up coordination. Total investment varies by show scale and booth size, typically ranging from ¥500,000 to ¥2,000,000+ for a standard participation.",
       },
       {
+        slug: "post-show-follow-up",
         question: "What is the realistic follow-up process after a Japan trade show?",
         answer:
           "Effective follow-up involves classifying leads within 48 hours, sending bilingual summary emails, scheduling next meetings, and preparing a decision memo for each serious prospect. Most SMEs lose momentum at this stage by not having a structured follow-up protocol.",
       },
       {
+        slug: "booth-distributor-screening",
         question: "How do you screen distributors at your booth?",
         answer:
           "Screen by asking about regional coverage, current portfolio overlap, cold-chain or logistics capability, typical MOQ requirements, after-sales structure, decision cycle, and exclusivity expectations. These seven questions eliminate misfit prospects quickly.",
       },
       {
+        slug: "exhibition-to-first-deal-timeline",
         question: "How long does it take from exhibition participation to a first deal in Japan?",
         answer:
           "Realistically, 6–12 months from first exhibition contact to a signed commercial agreement. Japanese distributors operate on careful evaluation cycles. Rushing the process typically causes rejection. First deal timelines improve significantly with pre-booked meetings.",
       },
       {
+        slug: "common-exhibition-failures",
         question: "What are the most common failure patterns after Japan exhibitions?",
         answer:
           "The most common failures are: no pre-booked meetings, unclear distributor type targeting, over-reliance on walk-in booth traffic, no structured follow-up after the event, and unrealistic expectations about deal timelines.",
       },
       {
+        slug: "foodex-malaysia-suitability",
         question: "Is Foodex Japan suitable for Malaysian food and beverage exporters?",
         answer:
           "Foodex Japan is the largest food and beverage trade show in Asia and attracts category-specific importers, distributors, and retail buyers. It is suitable for Malaysian exporters with a retail-ready or food-service product, Japanese-compliant labelling, and a preparation plan that includes pre-booked meetings. Attending without preparation or follow-up protocol produces minimal return. We support Foodex participation from pre-show meeting booking through post-show follow-up coordination.",
