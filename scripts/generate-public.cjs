@@ -73,9 +73,12 @@ const lines = [
 ];
 
 const slugRe = /slug:\s*"([^"]+)"/g;
+const seenSlugs = new Set();
 let m;
 while ((m = slugRe.exec(rawBlock)) !== null) {
   const slug = m[1];
+  if (seenSlugs.has(slug)) continue;
+  seenSlugs.add(slug);
   lines.push("  <url>");
   lines.push("    <loc>" + baseUrl + "/faq/" + slug + "</loc>");
   lines.push("    <lastmod>" + today + "</lastmod>");

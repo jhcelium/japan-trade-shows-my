@@ -12,6 +12,8 @@ type Props = {
   path: string;
   title: string;
   description: string;
+  /** WebPage JSON-LD `name` (defaults to `title` when omitted) */
+  pageStructuredName?: string;
   isFaq?: boolean;
   extraJsonLd?: Record<string, unknown>[];
 };
@@ -20,17 +22,19 @@ export default function SEOHead({
   path,
   title,
   description,
+  pageStructuredName,
   isFaq = false,
   extraJsonLd = [],
 }: Props) {
   const canonical = canonicalUrl(path);
   const robotsContent = siteConfig.noindex ? "noindex,nofollow" : "index,follow";
   const ogImage = `https://${siteConfig.domain}/og.png`;
+  const webPageName = pageStructuredName ?? title;
 
   const jsonLdScripts = [
     orgJsonLd(),
     webSiteJsonLd(),
-    webPageJsonLd(path, title, description),
+    webPageJsonLd(path, webPageName, description),
     ...(isFaq ? [faqPageJsonLd()] : []),
     ...extraJsonLd,
   ];

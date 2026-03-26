@@ -44,6 +44,7 @@ export default function FAQDetail() {
         path={path}
         title={title}
         description={description}
+        pageStructuredName={item.question}
         extraJsonLd={[singleFaqPageJsonLd(item)]}
       />
 
@@ -52,6 +53,7 @@ export default function FAQDetail() {
           question={item.question}
           answer={item.answer}
           slug={item.slug}
+          relatedQuestions={item.relatedQuestions}
         >
           <div className="border-t border-neutral-200 mt-10 pt-8 space-y-4 text-sm text-neutral-500">
             <p>

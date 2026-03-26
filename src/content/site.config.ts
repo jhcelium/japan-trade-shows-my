@@ -3,11 +3,18 @@
 // ONE-FILE CONFIGURATION — edit only this file per sub-site
 // ============================================================
 
+export type FAQRelatedLink = {
+  slug: string;
+  question: string;
+};
+
 export type FAQ = {
   question: string;
   answer: string;
   /** URL segment for /faq/:slug — set per entry when this site uses answer pages */
   slug?: string;
+  /** Optional links to other /faq/:slug pages (shown on answer pages) */
+  relatedQuestions?: FAQRelatedLink[];
 };
 
 export type CTA = {
@@ -305,6 +312,34 @@ export const SITE_PRESETS: Record<string, SiteConfig> = {
       "Osaka-based coordination for local logistics and meetings.",
     ],
     faq: [
+      {
+        slug: "are-trade-shows-a-good-way-to-enter-japan",
+        question: "Are Trade Shows a Good Way to Enter Japan?",
+        answer:
+          "Trade shows can be a strong part of a Japan market entry strategy when you treat them as a structured channel—not as a one-off event. They work best for category validation, meeting distributors and buyers in one place, and getting direct feedback on pricing and positioning. They are rarely sufficient on their own: most real progress happens in the weeks and months after the show.\n\nTrade shows are most useful when your product already has some regional traction, you know which channel you are targeting (wholesale, food service, retail, industrial), and you commit to pre-booked meetings plus disciplined follow-up. In that context, a Japan B2B exhibition accelerates introductions you would otherwise chase by email for months.\n\nThey are not enough when you expect the booth alone to close deals, when you have no importer-ready documentation or labelling clarity, or when you cannot travel or coordinate follow-up from Malaysia and Japan. Visiting without a screening script, or exhibiting without meetings booked in advance, usually produces contacts that go cold quickly.\n\nPreparation and follow-up matter more than floor traffic. Before the show, you should localise key messages, define who qualifies as a good distributor or buyer, and schedule appointments. After the show, classify leads, send bilingual summaries within days, and schedule the next conversation—otherwise the cost of the trip is rarely recovered.\n\nCommon mistakes include relying only on walk-in visitors, unclear distributor targeting, English-only follow-up with no decision memo for serious prospects, and assuming a first deal within weeks. Japanese buyers and distributors typically evaluate over many months; the exhibition is the start of a process, not the end.",
+        relatedQuestions: [
+          {
+            slug: "when-trade-shows-make-sense",
+            question: "When do Japan trade shows make sense as a market entry channel?",
+          },
+          {
+            slug: "trade-show-preparation",
+            question: "What does Japan trade show preparation involve?",
+          },
+          {
+            slug: "post-show-follow-up",
+            question: "What is the realistic follow-up process after a Japan trade show?",
+          },
+          {
+            slug: "common-exhibition-failures",
+            question: "What are the most common failure patterns after Japan exhibitions?",
+          },
+          {
+            slug: "which-japan-trade-fair",
+            question: "Which Japan trade fair is right for my product?",
+          },
+        ],
+      },
       {
         slug: "when-trade-shows-make-sense",
         question: "When do Japan trade shows make sense as a market entry channel?",
